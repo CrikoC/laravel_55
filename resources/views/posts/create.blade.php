@@ -27,7 +27,7 @@
                             <div class="input-group-addon">
                                 <label for="title"><i class="fa fa-id-card" aria-hidden="true"></i></label>
                             </div>
-                            <input type="text" name="title" id="title" class="form-control" placeholder="post name" required maxlength="255"">
+                            <input type="text" name="title" id="title" class="form-control" placeholder="post name" required maxlength="255">
                             <span id="title-block" class="help-block"></span>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                             <div class="input-group-addon">
                                 <label  for="slug"><i class="fa fa-laptop" aria-hidden="true"></i></label>
                             </div>
-                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Computer friendly name" required maxlength="255"">
+                            <input type="text" name="slug" id="slug" class="form-control" placeholder="Computer friendly name" required maxlength="255">
                             <span id="slug-block" class="help-block"></span>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     </div>
                     <hr>
                     <label for="featured_image">Image:</label>
-                    {{ Form::file('featured_file') }}
+                    {{ Form::file('featured_image') }}
                 </div>
                 <hr>
                 <div class="row">

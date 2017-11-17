@@ -30,7 +30,7 @@
                             <div class="input-group-addon">
                                 <label for="name"><i class="fa fa-id-card" aria-hidden="true"></i></label>
                             </div>
-                            {{ Form::text('name', null, ['placeholder' => 'Name of the category' ,'class' => 'form-control', 'required' => '', 'maxlength'=> '255']) }}
+                            {{ Form::text('name', null, ['id'=>'name','placeholder' => 'Name of the category' ,'class' => 'form-control', 'required' => '', 'maxlength'=> '255']) }}
                             <div class="input-group-addon"></div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             <div class="input-group-addon">
                                 <label  for="slug"><i class="fa fa-laptop" aria-hidden="true"></i></label>
                             </div>
-                            {{ Form::text('slug', null, ['placeholder' => 'Computer friendly name', 'class' => 'form-control', 'required' => '', 'maxlength'=> '255']) }}
+                            {{ Form::text('slug', null, ['id'=>'slug','placeholder' => 'Computer friendly name', 'class' => 'form-control', 'required' => '', 'maxlength'=> '255']) }}
                             <div class="input-group-addon"></div>
                         </div>
                     </div>
@@ -78,5 +78,22 @@
         </div>
         {!! Form::close() !!}
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+            $('#name').keyup(autoFillSlug);
+        });
+        function autoFillSlug() {
+            var title = $('#name');
+            var slug = $('#slug');
+            /* replace spaces with "_", uppercase letters with lowercase */
+            var newTitleValue = title.val().replace(/ +/g, "_").toLowerCase();
+            //convert utf characters
+
+            slug.val(newTitleValue);
+        }
+    </script>
 @endsection
 

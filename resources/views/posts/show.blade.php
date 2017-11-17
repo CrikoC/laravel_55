@@ -22,6 +22,7 @@
                                 <span class="label label-default">{{ $tag->name }}</span>
                             @endforeach
                         </div>
+                        <hr>
                         <div id="backend-comments">
                             <h3>Comments <small>{{ $post->comments()->count() }} total</small></h3>
                             <table class="table">

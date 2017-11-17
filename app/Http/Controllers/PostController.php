@@ -70,7 +70,6 @@ class PostController extends Controller
         //Save featured image
         if($request->hasFile('featured_image')) {
             $image = $request->file('featured_image');
-
             //Save image
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $location = public_path('images/'. $filename);
