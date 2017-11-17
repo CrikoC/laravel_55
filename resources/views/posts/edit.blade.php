@@ -65,7 +65,7 @@
                     <hr>
                     <h4>Current Image</h4>
                     @if($post->image != null)
-                    <p><img src="{{ url('gallery_images/thumbnails/'.$post->thumbnail) }}" width="200"></p>
+                    <p><img src="{{ url('images/thumbnails/'.$post->thumbnail) }}" width="200"></p>
                     @endif
                     <hr>
                     <label for="featured_file">New Image:</label>

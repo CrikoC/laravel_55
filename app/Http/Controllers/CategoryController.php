@@ -58,10 +58,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-//        $this->validate($request, [
-//            'name' => 'required|max:255',
-//            'slug'      => 'required|alpha_dash|min:5|max:255|unique:categories,slug',
-//        ]);
+        $request->validate([
+            'name' => 'required|max:255',
+            'slug'      => 'required|alpha_dash|max:255|unique:categories,slug',
+        ]);
 
         //Store data in the database
         $category = new Category;
@@ -120,22 +120,22 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-//        if($request->input('slug') == $category->slug) {
-//            //Validate the data without the slug
-//            $this->validate($request, [
-//                'name'         => 'required|max:255',
-//                'category_id'   => 'required|integer',
-//                'body'          => 'required'
-//            ]);
-//        } else {
-//            //Validate the data with the slug
-//            $this->validate($request, [
-//                'name'         => 'required|max:255',
-//                'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-//                'category_id'   => 'required|integer',
-//                'body'          => 'required'
-//            ]);
-//        }
+        if($request->input('slug') == $category->slug) {
+            //Validate the data without the slug
+            $request->validate([
+                'name'         => 'required|max:255',
+                'category_id'   => 'required|integer',
+                'body'          => 'required'
+            ]);
+        } else {
+            //Validate the data with the slug
+            $request->validate([
+                'name'         => 'required|max:255',
+                'slug'          => 'required|alpha_dash|min:5|max:255|unique:categories,slug',
+                'category_id'   => 'required|integer',
+                'body'          => 'required'
+            ]);
+        }
 
         $category->name = $request->name;
         $category->slug = $request->slug;

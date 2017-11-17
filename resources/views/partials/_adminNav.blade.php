@@ -24,8 +24,19 @@
                         </li>
                     </ul>
                 </li>
-                <li class="{{ Request::is('posts.index') ? 'active' : '' }}">
-                    <a href="{{ route('posts.index') }}">Posts<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-pushpin"></span></a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posts <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-pushpin"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li class="{{ Request::is('posts.create') ? 'active' : '' }}">
+                            <a href="{{route('posts.create')}}">Create New</a>
+                        </li>
+                        <li class="{{ Request::is('posts.index') ? 'active' : '' }}">
+                            <a href="{{route('posts.index')}}">Show all</a>
+                        </li>
+                    </ul>
+
+                <li class="{{ Request::is('tags.index') ? 'active' : '' }}">
+                    <a href="{{ route('tags.index') }}">Tags<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tag"></span></a>
                 </li>
             </ul>
         </div>

@@ -2,6 +2,7 @@
 @section('title','| Create Post')
 @section('stylesheets')
     {!! Html::style('css/parsley.css')  !!}
+    {!! Html::style('css/select2.min.css')  !!}
     {!! Html::style('css/admin.css') !!}
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>
@@ -59,6 +60,18 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <label for="'tags[]">Tags:</label>
+                            </div>
+                            <select class="form-control select2-multi" name="tags[]" multiple="true">
+                                @foreach($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <hr>
                     <label for="featured_image">Image:</label>
                     {{ Form::file('featured_file') }}
@@ -79,8 +92,8 @@
 @endsection
 @section('scripts')
     {!! Html::script('js/jquery.min.js') !!}
+    {!! Html::script('js/select2.min.js')  !!}
     {!! Html::script('js/parsley.min.js')  !!}
-    {!! Html::script('js/dropzone.js')  !!}
     <script>
         $(document).ready(function(){
             $('#title').keyup(autoFillSlug);

@@ -25,6 +25,9 @@
                                 <td>
                                     <span class="glyphicon glyphicon-pushpin"></span><a href="{{ route('posts.index') }}"> {{ $posts->count() }} Posts</a>
                                 </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-tag"></span><a href="{{ route('tags.index') }}"> {{ $tags->count() }} Tags</a>
+                                </td>
                             </tr>
                         </table>
                     </div>

@@ -30,7 +30,7 @@
                                     <th>{{ $i++ }}</th>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->category['name'] }}</td>
-                                    <td><img src="{{url("gallery_images/thumbnails/".$post->thumbnail) }}" width="100"></td>
+                                    <td><img src="{{url("images/thumbnails/".$post->thumbnail) }}" width="100"></td>
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('posts.show', $post->id) }}"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;View</a>
                                         <a class="btn btn-primary" href="{{ route('posts.edit', $post->id) }}"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit</a>

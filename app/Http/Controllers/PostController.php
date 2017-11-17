@@ -9,6 +9,7 @@ use Session;
 use App\Category;
 use App\Tag;
 use Purifier;
+use File;
 use Image;
 
 class PostController extends Controller
@@ -51,7 +52,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         // Validate the data
-        $this->validate($request, [
+        $request->validate([
             'title'         => 'required|max:255',
             'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
             'category_id'   => 'required|integer',
@@ -69,13 +70,19 @@ class PostController extends Controller
         //Save featured image
         if($request->hasFile('featured_image')) {
             $image = $request->file('featured_image');
+
+            //Save image
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $location = public_path('images/'. $filename);
-            Image::make($image)->resize(800, 400)->save($location);
-
+            Image::make($image)->save($location);
             $post->image = $filename;
-        }
 
+            //Save thumbnail
+            $thumbnail_filename = time() . '_small.' . $image->getClientOriginalExtension();
+            $thumbnail_location = public_path('images/thumbnails/'. $thumbnail_filename);
+            Image::make($image)->fit(300, 300)->save($thumbnail_location);
+            $post->thumbnail = $thumbnail_filename;
+        }
 
         $post->save();
 
@@ -113,9 +120,9 @@ class PostController extends Controller
         $categories = Category::all();
         $cats = [];
 
-        foreach($categories as $category) {
-            $cats[$category->id] = $category->name;
-        }
+//        foreach($categories as $category) {
+//            $cats[$category->id] = $category->name;
+//        }
 
         $tags = Tag::all();
         $tags2 = [];
@@ -128,7 +135,7 @@ class PostController extends Controller
         $post = Post::find($id);
 
         //Return view with the variable
-        return view('posts.edit')->withPost($post)->withCategories($cats)->withTags($tags2);
+        return view('posts.edit')->withPost($post)->withCategories($categories)->withTags($tags2);
     }
 
     /**
@@ -145,14 +152,14 @@ class PostController extends Controller
 
         if($request->input('slug') == $post->slug) {
             //Validate the data without the slug
-            $this->validate($request, [
+            $request->validate([
                 'title'         => 'required|max:255',
                 'category_id'   => 'required|integer',
                 'body'          => 'required'
             ]);
         } else {
             //Validate the data with the slug
-            $this->validate($request, [
+            $request->validate([
                 'title'         => 'required|max:255',
                 'slug'          => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
                 'category_id'   => 'required|integer',
@@ -167,6 +174,27 @@ class PostController extends Controller
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
         $post->body = Purifier::clean($request->input('body'));
+
+        //Save featured image
+        if($request->hasFile('featured_image')) {
+            //Delete existing
+            File::delete('images/'. $post->image);
+            File::delete('images/thumbnails/'. $post->thumbnail);
+
+            $image = $request->file('featured_image');
+            //Save image
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/'. $filename);
+            Image::make($image)->save($location);
+            $post->image = $filename;
+
+            //Save thumbnail
+            $thumbnail_filename = time() . '_small.' . $image->getClientOriginalExtension();
+            $thumbnail_location = public_path('images/thumbnails/'. $thumbnail_filename);
+            Image::make($image)->fit(300, 300)->save($thumbnail_location);
+            $post->thumbnail = $thumbnail_filename;
+
+        }
 
         $post->save();
 
@@ -196,6 +224,9 @@ class PostController extends Controller
 
         //Remove any reference of this post from the tags table
         $post->tags()->detach();
+
+        File::delete('images/'. $post->image);
+        File::delete('images/thumbnails/'. $post->thumbnail);
 
         $post->delete();
 
