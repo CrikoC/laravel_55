@@ -1,7 +1,9 @@
-@extends('main')
+@extends('adminMain')
 
 @section('title', '| Edit Comment')
 
+@section('stylesheets')
+    {!! Html::style('css/admin.css') !!}
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script>
         tinymce.init({
@@ -10,6 +12,9 @@
             plugins: "link, code image imagetools",
         });
     </script>
+@endsection
+
+
 
 @section('content')
     <div class="row">

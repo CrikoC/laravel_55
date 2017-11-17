@@ -1,9 +1,10 @@
-@extends('main')
+@extends('adminMain')
 
 @section('title','| Tags')
 
 @section('stylesheets')
     {!! Html::style('css/parsley.css')  !!}
+    {!! Html::style('css/admin.css')  !!}
 @endsection
 
 

@@ -1,6 +1,10 @@
-@extends('main')
+@extends('adminMain')
 <?php $nameTag = htmlspecialchars($tag->name); ?>
 @section('title', '| $nameTag Tag')
+
+@section('stylesheets')
+    {!! Html::style('css/admin.css')  !!}
+@endsection
 
 @section('content')
     <div class="row">

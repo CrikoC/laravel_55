@@ -1,4 +1,10 @@
-@extends('main')
+@extends('adminMain')
+
+@section('stylesheets')
+    {!! Html::style('css/select2.min.css')  !!}
+    {!! Html::style('css/admin.css')  !!}
+@endsection
+
 
 @section('title', '| $tag->name Tag')
 

@@ -34,7 +34,7 @@
         }
 
         public function postContact(Request $request) {
-            $this->validate($request, [
+            $request->validate([
                 'email'     => 'required|email',
                 'subject'   => 'min:3',
                 'message'   => 'min:10'

@@ -1,6 +1,10 @@
-@extends('main')
+@extends('adminMain')
 
 @section('title', '| Delete Comment')
+
+@section('stylesheets')
+    {!! Html::style('css/admin.css') !!}
+@endsection
 
 @section('content')
     <div class="row">
