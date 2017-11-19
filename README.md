@@ -2,7 +2,7 @@
 
 A simple blog app with laravel 5.5
 
-##Requirements
+## Requirements
 
 1. PHP - Apache - MySQL server (XAMPP WAMP MAMP)
 
